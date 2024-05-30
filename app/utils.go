@@ -127,14 +127,10 @@ func extractSubscriptions(container docker.Container) []pubsub.Subscription {
 		}
 	}
 
-	// Convert map to slice, only consider valid subscriptions
 	for _, subscription := range subscriptionMap {
-		if subscription.Topic != "" && subscription.Endpoint != "" {
-			// Only include subscriptions with both topic and endpoint populated
-			subscriptions = append(subscriptions, *subscription)
-		} else {
-			log.Warnf("skipping incomplete subscription: %s, both topic and endpoint must be provided\n", subscription.Name)
-		}
+
+		subscriptions = append(subscriptions, *subscription)
+
 	}
 
 	return subscriptions

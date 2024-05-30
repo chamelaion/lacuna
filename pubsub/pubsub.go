@@ -95,8 +95,18 @@ func (ps *pubSubImpl) CreateSubscription(ctx context.Context, subscription Subsc
 func (ps *pubSubImpl) createSubscription(ctx context.Context, topic *gcps.Topic, subscription Subscription) error {
 	log := ps.log.WithField("subscription_id", subscription.GetSubscriptionID()).WithField("topic", subscription.Topic).WithField("endpoint", subscription.Endpoint)
 
-	_, err := ps.client.CreateSubscription(ctx, subscription.GetSubscriptionID(), createSubscriptionConfig(topic, subscription))
+	cfg := createSubscriptionConfig(topic, subscription)
 
+	// Determine if subscription is push or pull and set configuration accordingly
+	if subscription.Endpoint == "" {
+		cfg.PushConfig = gcps.PushConfig{}
+	} else {
+		cfg.PushConfig = gcps.PushConfig{
+			Endpoint: subscription.Endpoint,
+		}
+	}
+
+	_, err := ps.client.CreateSubscription(ctx, subscription.GetSubscriptionID(), cfg)
 	if err != nil {
 		log.WithError(err).Error("error creating subscription")
 		return err
@@ -105,6 +115,7 @@ func (ps *pubSubImpl) createSubscription(ctx context.Context, topic *gcps.Topic,
 	log.Debug("subscription created")
 
 	return nil
+
 }
 
 // func (ps *pubSubImpl) updateSubscription(ctx context.Context, sub *gcps.Subscription, subscription Subscription) error {
