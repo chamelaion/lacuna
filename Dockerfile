@@ -17,7 +17,7 @@ RUN make build
 
 FROM alpine:3.18
 
-ENV PUBSUB_EMULATOR_HOST=127.0.0.1:8085
+ENV PUBSUB_EMULATOR_HOST=127.0.0.1:8084
 
 COPY --from=builder /app/bin/lacuna /usr/local/bin/lacuna
 

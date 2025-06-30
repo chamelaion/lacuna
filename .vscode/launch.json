@@ -10,9 +10,12 @@
             "request": "launch",
             "mode": "auto",
             "program": "${workspaceFolder}",
-            "args": ["daemon", "-vvv"],
+            "args": [
+                "daemon",
+                "-vvv"
+            ],
             "env": {
-                "PUBSUB_EMULATOR_HOST": "127.0.0.1:8085"
+                "PUBSUB_EMULATOR_HOST": "127.0.0.1:8084"
             }
         }
     ]

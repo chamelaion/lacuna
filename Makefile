@@ -16,6 +16,10 @@ all: build
 build:
 	go build -race -o ./bin/lacuna $(GOFLAGS) .
 
+
+build-lacuna:
+	docker build -t lacuna .
+
 staticcheck:
 	staticcheck ${PKG_LIST}
 
