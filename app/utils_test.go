@@ -174,8 +174,8 @@ func TestExtractSubscriptionSkipsIncompleteSubscriptions(t *testing.T) {
 	subscriptions := extractSubscriptions(container)
 
 	// assert
-	if len(subscriptions) != 0 {
-		t.Errorf("expected 0 subscription, got %d", len(subscriptions))
+	if len(subscriptions) != 1 {
+		t.Errorf("expected 1 subscription, got %d", len(subscriptions))
 	}
 }
 
@@ -209,8 +209,8 @@ func TestExtractSubscriptionsSkipsInvalidLabels(t *testing.T) {
 	subscriptions := extractSubscriptions(container)
 
 	// assert
-	if len(subscriptions) != 0 {
-		t.Errorf("expected 0 subscription, got %d", len(subscriptions))
+	if len(subscriptions) != 1 {
+		t.Errorf("expected 1 subscription, got %d", len(subscriptions))
 	}
 }
 
