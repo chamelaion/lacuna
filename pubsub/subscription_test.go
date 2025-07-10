@@ -10,7 +10,7 @@ func TestGetSubscriptionId(t *testing.T) {
 
 	subscriptionId := subscription.GetSubscriptionID()
 
-	if subscriptionId != "payment_product-created" {
-		t.Errorf("Expected subscriptionId to be 'payment_product-created, got %s", subscriptionId)
+	if subscriptionId != "product-created" {
+		t.Errorf("Expected subscriptionId to be 'product-created, got %s", subscriptionId)
 	}
 }
